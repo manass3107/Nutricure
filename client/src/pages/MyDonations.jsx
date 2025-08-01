@@ -99,11 +99,11 @@ const MyDonations = () => {
                 <li key={item._id} style={{ marginBottom: '1rem', border: '1px solid #ccc', padding: '1rem' }}>
                   {item.image && (
                     <img
-                    src={`http://localhost:5000${item.image}`}
-                    alt={item.name}
-                    style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '1rem' }}
+                      src={`http://localhost:5000${item.image}`}
+                      alt={item.name}
+                      style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '1rem' }}
                     />
-                )}
+                  )}
                   <strong>{item.name}</strong> - Type: {item.type}
                   <br />
                   Status: <strong>{getStatus(item)}</strong>

@@ -1,3 +1,4 @@
+// server/models/Donation.js
 const mongoose = require('mongoose');
 const donationSchema = new mongoose.Schema({
   donorId: {
@@ -50,7 +51,7 @@ const donationSchema = new mongoose.Schema({
     ref: 'User',
     default: null,
   },
-  image: {
+  image: { // This field is already present and will store the Cloudinary URL
     type: String
   },
   acceptedAt: {

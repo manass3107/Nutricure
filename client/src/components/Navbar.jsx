@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+// Removed MessageSquare icon, kept others relevant to donations/profile
+import { Home, Utensils, Pill, User, LogOut, HeartHandshake } from 'lucide-react';
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -17,54 +19,45 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.nav}>
-      <Link to="/dashboard" style={styles.logo}>Nutricure</Link>
+    <nav className="flex flex-col sm:flex-row items-center justify-between px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-700 text-white shadow-lg z-10 relative">
+      <Link to="/dashboard" className="text-2xl font-extrabold text-white no-underline hover:text-gray-100 transition-colors duration-300 mb-2 sm:mb-0">Nutricure</Link>
 
-      {user ? (
-        <>
-          <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-          <Link to="/my-donations" style={styles.link}>My Donations</Link> {/* Consolidated link */}
-          <Link to="/donate-food" style={styles.link}>Donate Food</Link>
-          <Link to="/donate-medicine" style={styles.link}>Donate Medicine</Link>
-          <Link to="/profile" style={styles.link}>Profile</Link>
-          <button onClick={handleLogout} style={styles.logoutBtn}>Logout</button>
-        </>
-      ) : (
-        <>
-          <Link to="/login" style={styles.link}>Login</Link>
-          <Link to="/register" style={styles.link}>Register</Link>
-        </>
-      )}
+      <div className="flex flex-wrap justify-center sm:justify-end items-center space-x-4">
+        {user ? (
+          <>
+            <Link to="/dashboard" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <Home className="w-5 h-5 mr-1" /> Dashboard
+            </Link>
+            <Link to="/my-donations" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <HeartHandshake className="w-5 h-5 mr-1" /> My Donations
+            </Link>
+            <Link to="/donate-food" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <Utensils className="w-5 h-5 mr-1" /> Donate Food
+            </Link>
+            <Link to="/donate-medicine" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <Pill className="w-5 h-5 mr-1" /> Donate Medicine
+            </Link>
+            <Link to="/profile" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <User className="w-5 h-5 mr-1" /> Profile
+            </Link>
+            {/* REMOVED: Chat link */}
+            {/* <Link to="/chat" className="flex items-center text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">
+              <MessageSquare className="w-5 h-5 mr-1" /> Chat
+            </Link> */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center bg-white text-green-700 border border-white px-3 py-1 rounded-md hover:bg-green-100 hover:text-green-800 transition-colors duration-200 font-medium shadow-sm"
+            >
+              <LogOut className="w-5 h-5 mr-1" /> Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">Login</Link>
+            <Link to="/register" className="text-white no-underline hover:text-green-100 transition-colors duration-200 px-2 py-1 rounded-md">Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
-
-const styles = {
-  nav: {
-    display: 'flex',
-    gap: '1rem',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '1rem 2rem',
-    backgroundColor: '#282c34',
-    color: 'white'
-  },
-  logo: {
-    fontSize: '1.2rem',
-    color: 'white',
-    textDecoration: 'none',
-    fontWeight: 'bold'
-  },
-  link: {
-    color: 'white',
-    textDecoration: 'none',
-    marginRight: '1rem'
-  },
-  logoutBtn: {
-    background: 'transparent',
-    color: 'white',
-    border: '1px solid white',
-    padding: '0.3rem 0.7rem',
-    cursor: 'pointer'
-  }
-};

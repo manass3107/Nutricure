@@ -7,24 +7,24 @@ const SetCity = ({ token, setUser }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  const token = localStorage.getItem('token');
+    e.preventDefault();
+    const token = localStorage.getItem('token');
     if (!token) {
       alert("No token found!");
       return;
     }
-  try {
-    console.log('Sending city:', city);
-    await axios.patch('/user/city', { city }, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    alert('City set!');
-    navigate('/dashboard');
-  } catch (err) {
-    console.error('City update failed:', err);
-    alert('City update failed');
-  }
-};
+    try {
+      console.log('Sending city:', city);
+      await axios.patch('/user/city', { city }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('City set!');
+      navigate('/dashboard');
+    } catch (err) {
+      console.error('City update failed:', err);
+      alert('City update failed');
+    }
+  };
 
 
   return (

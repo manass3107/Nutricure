@@ -1,10 +1,11 @@
+// server/routes/medicine.js
 const express = require('express');
 const router = express.Router();
 const Donation = require('../models/Donation');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Middleware to verify JWT token
+// Middleware to verify JWT token (already present)
 const auth = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(403).json({ error: 'No token' });
@@ -17,11 +18,14 @@ const auth = (req, res, next) => {
   }
 };
 
+// POST route for creating a medicine donation
+// This route now expects the 'image' field in req.body to be the Cloudinary URL
 router.post('/', auth, async (req, res) => {
-  const { name, quantity, city, address, phone, expiryDate, image } = req.body; 
+  const { name, quantity, city, address, phone, expiryDate, image } = req.body;
 
+  // Basic validation: all required fields (except image, which is optional)
   if (!name || !quantity || !city || !address || !phone || !expiryDate) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'All required fields (Name, Quantity, City, Address, Phone, Expiry Date) are missing.' });
   }
 
   try {
@@ -34,17 +38,18 @@ router.post('/', auth, async (req, res) => {
       address,
       phone,
       expiryDate,
-      image 
+      image // The 'image' field will now directly store the Cloudinary URL passed from frontend
     });
 
     await newDonation.save();
-    res.status(201).json({ message: 'Medicine donation created successfully' });
+    res.status(201).json({ message: 'Medicine donation created successfully', donation: newDonation }); // Respond with the created donation object
   } catch (err) {
     console.error('Medicine donation error:', err.message);
     res.status(500).json({ error: 'Failed to donate medicine' });
   }
 });
 
+// GET route for fetching medicine donations (already present and fine)
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
@@ -59,7 +64,7 @@ router.get('/', auth, async (req, res) => {
     };
 
     if (search) {
-      query.name = { $regex: search, $options: 'i' }; 
+      query.name = { $regex: search, $options: 'i' };
     }
 
     const meds = await Donation.find(query);
@@ -70,6 +75,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// PATCH route for accepting medicine donation (already present and fine)
 router.patch('/:id/accept', auth, async (req, res) => {
   try {
     const donation = await Donation.findById(req.params.id);

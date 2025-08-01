@@ -6,7 +6,7 @@ const User = require('../models/User');
 
 router.patch('/city', async (req, res) => {
   const authHeader = req.headers.authorization;
-  console.log('🔍 Authorization header:', authHeader); 
+  console.log('🔍 Authorization header:', authHeader);
 
   const token = authHeader?.split(" ")[1];
   if (!token) return res.status(403).json({ error: 'No token' });

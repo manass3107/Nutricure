@@ -1,68 +1,166 @@
+/* src/index.css */
+/* Minimal CSS as Tailwind will handle most styling */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Define some custom properties if needed, otherwise Tailwind handles colors, fonts, etc. */
+  --color-primary: #4CAF50;
+  /* A green shade for primary actions */
+  --color-secondary: #FFC107;
+  /* An amber shade for secondary actions */
+  --color-text-dark: #333;
+  --color-text-light: #f8f8f8;
+  --color-background-light: #f8f8f8;
+  --color-background-dark: #2c3e50;
+  /* Darker background for elements like Navbar */
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  /* Ensure Inter font is applied */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text-dark);
+  /* Default text color */
+  background-color: var(--color-background-light);
+  /* Default background */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Basic styling for links and buttons to ensure consistency */
+a {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.25s ease-in-out;
+}
+
+a:hover {
+  color: #388e3c;
+  /* Darker green on hover */
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0.5rem;
+  /* Tailwind's rounded-lg */
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-primary);
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #388e3c;
+  /* Darker green border on hover */
+  background-color: #388e3c;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+  outline-color: var(--color-primary);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Form input styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  /* Tailwind's border-gray-300 */
+  border-radius: 0.375rem;
+  /* Tailwind's rounded-md */
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  background-color: white;
+}
+
+input[type="file"] {
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+/* Basic auth container styling */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-background-light);
+}
+
+.auth-form {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 0.75rem;
+  /* Tailwind's rounded-xl */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Tailwind's shadow-md */
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1em;
+}
+
+/* Message box for alerts */
+.message-box {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  /* Green for success */
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-box.error {
+  background-color: #f44336;
+  /* Red for error */
+}
+
+.message-box button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0;
 }
