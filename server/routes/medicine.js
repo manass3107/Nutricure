@@ -5,7 +5,7 @@ const Donation = require('../models/Donation');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Middleware to verify JWT token (already present)
+// Middleware to verify JWT token 
 const auth = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(403).json({ error: 'No token' });
@@ -23,7 +23,7 @@ const auth = (req, res, next) => {
 router.post('/', auth, async (req, res) => {
   const { name, quantity, city, address, phone, expiryDate, image } = req.body;
 
-  // Basic validation: all required fields (except image, which is optional)
+  // Basic validation: all required fields 
   if (!name || !quantity || !city || !address || !phone || !expiryDate) {
     return res.status(400).json({ error: 'All required fields (Name, Quantity, City, Address, Phone, Expiry Date) are missing.' });
   }
@@ -49,7 +49,7 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// GET route for fetching medicine donations (already present and fine)
+// GET route for fetching medicine donations 
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);

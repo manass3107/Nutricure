@@ -25,7 +25,7 @@ router.post('/', auth, async (req, res) => {
   const { name, quantity, city, address, phone, expectedEdibleTill, image } = req.body;
 
   // Basic validation: all required fields (except image, which is optional)
-  if (!name || !quantity || !city || !address || !phone || !expectedEdibleTill) { // Added expectedEdibleTill as required
+  if (!name || !quantity || !city || !address || !phone || !expectedEdibleTill) {
     return res.status(400).json({ error: 'All required fields (Name, Quantity, City, Address, Phone, Edible Till) are missing.' });
   }
 

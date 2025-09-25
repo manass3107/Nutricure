@@ -1,18 +1,3 @@
-/* src/App.css */
-/* This file can be mostly empty as index.css and Tailwind will handle global styles */
-/* Any specific component-level CSS that cannot be expressed with Tailwind can go here */
-
-/* Example: if you had a very specific animation for a component */
-/* .my-custom-animation {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-} */
-
-/* Ensure root is full height for proper layout */
 #root {
   display: flex;
   flex-direction: column;
